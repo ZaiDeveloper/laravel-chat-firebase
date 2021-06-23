@@ -19,6 +19,27 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    @yield('style')
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-messaging.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCkKsnRX3xLUGZEHR4ULkmZwGRnNC4V8ww",
+            authDomain: "chatsi-realtime-laravel-f3ce6.firebaseapp.com",
+            projectId: "chatsi-realtime-laravel-f3ce6",
+            storageBucket: "chatsi-realtime-laravel-f3ce6.appspot.com",
+            messagingSenderId: "5742079653",
+            appId: "1:5742079653:web:dfb63b07c1d32e123ce74c"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 <body>
     <div id="app">
@@ -78,24 +99,6 @@
         </main>
     </div>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-
-    <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyCkKsnRX3xLUGZEHR4ULkmZwGRnNC4V8ww",
-            authDomain: "chatsi-realtime-laravel-f3ce6.firebaseapp.com",
-            projectId: "chatsi-realtime-laravel-f3ce6",
-            storageBucket: "chatsi-realtime-laravel-f3ce6.appspot.com",
-            messagingSenderId: "5742079653",
-            appId: "1:5742079653:web:dfb63b07c1d32e123ce74c"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
+    @stack('script')
 </body>
 </html>
