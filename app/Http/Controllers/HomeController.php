@@ -43,11 +43,10 @@ class HomeController extends Controller
             'message' => $message
         ]);
 
-        $this->broadcastMessage(auth()->user()->name,$message);
+        $this->broadcastMessage(auth()->user()->name, $message);
 
         $chat->save();
         return redirect()->back();
-
     }
 
     private function broadcastMessage($senderName, $message)
@@ -58,7 +57,7 @@ class HomeController extends Controller
         $notificationBuilder = new PayloadNotificationBuilder('New message from : ' . $senderName);
         $notificationBuilder->setBody($message)
             ->setSound('default')
-            ->setClickAction('http://127.0.0.1:8000/home');
+            ->setClickAction('https://laravel-6-realtime-chat-firebase.test/home');
 
         $dataBuilder = new PayloadDataBuilder();
         $dataBuilder->addData([
@@ -71,10 +70,9 @@ class HomeController extends Controller
         $data = $dataBuilder->build();
 
         $tokens = User::all()->pluck('fcm_token')->toArray();
-
+        // dd($tokens);
         $downstreamResponse = FCM::sendTo($tokens, $option, $notification, $data);
 
         return $downstreamResponse->numberSuccess();
-
     }
 }
